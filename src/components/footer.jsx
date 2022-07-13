@@ -3,13 +3,13 @@ const Footer = () =>{
     <div className="bg-slate-800">
         <div>
             <h1 className="text-center text-4xl font-semibold text-white p-9">How We're Different</h1>
-            <ul className="list-none p-5 grid grid-cols-1">
-                <li>
-                <div className="p-6  flex">
+            <ul className="list-none grid">
+                <li className="">
+                <div className=" p-2  lg:flex ">
                         <div className="shrink-0  w-48 align-middle bg-slate-800  ">
-                            <img src="delivery.png" alt="cloud" className="w-44 " />
+                            <img src="delivery.png" alt="cloud" className="w-44" />
                         </div>
-                    <div className="">
+                    <div className=" ">
                         <p className="text-white font-semibold text-3xl text-left p-2"> Place a pickup and/or delivery from the comfort of your home or office with our easy to use app.</p>
                         <p className=" text-xl text-white text-left p-2">The Pickups app allows you to deliver anything on-demand; no more paperwork or driving to your local courier to get something shipped.
 
@@ -21,7 +21,7 @@ const Footer = () =>{
                 </li>
                 
                 <li>
-                <div className="p-6  flex">
+                <div className="p-2 lg:flex">
                         <div className="shrink-0  w-48 align-middle bg-slate-800  ">
                             <img src="delivery-boy.png" alt="cloud" className="w-44 " />
                         </div>
@@ -33,7 +33,7 @@ const Footer = () =>{
                     <hr></hr>
                 </li>
                 <li>
-                <div className="p-6  flex">
+                <div className="p-2  lg:flex">
                         <div className="shrink-0  w-48 align-middle bg-slate-800  ">
                             <img src="delivery-truck.png" alt="cloud" className="w-44 " />
                         </div>

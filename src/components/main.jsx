@@ -1,7 +1,6 @@
 const myStyle={
     backgroundImage: 
 "url('/aa.gif')",
-    height:'120vh',
     marginTop:'',
     backgroundposition: 'center',
     backgroundSize: 'cover',
@@ -19,7 +18,7 @@ const myStyle={
 const Main = () =>{
     return(
     <div>
-        <div className="p-4" style={myStyle}>
+        <div className="p-4 lg:h-[720px]" style={myStyle}>
             <div className="lg:mt-11 md:mt-8 sm:mt-7">
                <h1 className="lg:text-6xl md:text-4xl sm:text-3xl text-white font-sans font-semibold ">Your Everything On-Demand</h1>
             </div>
@@ -44,7 +43,7 @@ const Main = () =>{
         </div>
         <div className="basis-full bg-neutral-800 h-96 ">
             <div className="flex items-center justify-center content-center">
-                <img src="/video-image-2.jpg" alt='detail' className="ld:mt-16 md:mt-24 sm:mt-20 lg:max-h-[340px] md:max-h-[330px] sm:max-h-[330px]" />
+                <img src="/video-image-2.jpg" alt='detail' className="ld:mt-16 md:mt-24 sm:mt-20 mt-24 lg:max-h-[340px] md:max-h-[330px] sm:max-h-[330px]" />
             </div>
         </div>
         <div className="mt-24">
