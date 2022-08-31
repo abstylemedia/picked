@@ -20,10 +20,12 @@ export default class Clogin extends Component {
         
         axios.post("https://pickedapi.herokuapp.com/Clientlogin", this.state)
             .then( res => {
-                alert(res.data.message);
-                localStorage.setItem('my-key', res.data.data);
-                if (!sessionStorage.getItem('my-key')){
+                
+                localStorage.setItem('my-key', res.data.token);
+                if (res.data.message == "ok"){
                     window.location.href = "/dashboard";
+                }else{
+                    alert("User Not Found")
                 }
                 
                 
