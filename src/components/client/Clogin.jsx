@@ -22,7 +22,10 @@ export default class Clogin extends Component {
             .then( res => {
                 alert(res.data.message);
                 localStorage.setItem('my-key', res.data.data);
-                window.location.href = "/dashboard";
+                if (!sessionStorage.getItem('my-key')){
+                    window.location.href = "/dashboard";
+                }
+                
                 
             })
     }
