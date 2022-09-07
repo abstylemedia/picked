@@ -3,9 +3,9 @@ import Modal from './modal';
 
 export default class additem extends Component {
     componentDidMount(){
-        if (!sessionStorage.getItem('droplocation')){
-            window.location.href = "/dropsearch";
-        }
+        //if (!sessionStorage.getItem('droplocation')){
+            //window.location.href = "/dropsearch";
+        //}
     }
     constructor(props) {
         super(props);

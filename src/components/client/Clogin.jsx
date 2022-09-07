@@ -23,7 +23,7 @@ export default class Clogin extends Component {
                 
                 localStorage.setItem('my-key', res.data.token);
                 if (res.data.message == "ok"){
-                    window.location.href = "/dashboard";
+                    window.location.href = "/cdashboard";
                 }else{
                     alert("User Not Found")
                 }

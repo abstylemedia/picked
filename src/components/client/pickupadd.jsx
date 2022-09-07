@@ -85,8 +85,8 @@ export default class Pickupadd extends Component {
                     <p className=" font-bold ">Enter Pick Up Location:</p>
                     <div className="mt-2 px-4 border-2 rounded">
                     <p className="text-gray-500">Pick Up Location:</p>
-                    <p className="font-bold">{sessionStorage.getItem('pickcity')}</p>
-                    <p>{sessionStorage.getItem('pickstate')}, {sessionStorage.getItem('pickzip')}, {sessionStorage.getItem('pickcountry')} </p>
+                    <p className="font-bold">{sessionStorage.getItem('pickstreetnumber')} {sessionStorage.getItem('pickstreername')}</p>
+                    <p>{sessionStorage.getItem('picklocality')}, {sessionStorage.getItem('pickstate')}, {sessionStorage.getItem('pickcountry')} </p>
                     </div>
                     
                     <p className=" font-bold mt-2">Type of Location:</p>
@@ -104,16 +104,14 @@ export default class Pickupadd extends Component {
                     <form className="mt-4">
                         <div className="grid grid-cols-2 gap-6">
                             <div className="relative z-0 mb-6 w-full group">
-                                <input type="tel" name="floating_phone" id="floating_phone" onChange={ (e) => this.setState({ unit: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Unit/Suite Number" required />
+                                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  onChange={ (e) => this.setState({ unit: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Unit/Suite Number" required />
                             </div>
                             <div className="relative z-0 mb-6 w-full group">
-                                <input type="text" name="floating_company" id="floating_company" onChange={ (e) => this.setState({ buzzer: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Buzzer#" required />
+                                <input type="tel"  onChange={ (e) => this.setState({ buzzer: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Buzzer#" required />
                             </div>
                         </div>
                         <div className="relative z-0 mb-6 w-full group">
-                            <textarea type="text" 
-                            onChange={ (e) => this.setState({ additional: e.target.value})} 
-                            name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Additional Details:(e.g. drop off at concierge)" required ></textarea>
+                            <textarea type="text" onChange={ (e) => this.setState({ additional: e.target.value})}  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Additional Details:(e.g. drop off at concierge)" required ></textarea>
                         </div>
                     </form>
                 </div>
@@ -131,6 +129,7 @@ export default class Pickupadd extends Component {
                 </button>
                 </div>
         </footer>
+        
         </section>
     )
 };

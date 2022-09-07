@@ -6,7 +6,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import Admin from './components/admin/admin';
+import Alogin from './components/admin/Alogin';
 import Home from './components/home/home';
 import Pickupadd from './components/client/pickupadd';
 import Dropadd from './components/client/dropadd';
@@ -16,6 +16,9 @@ import Dropsearch from './components/client/dropsearch';
 import Review from './components/client/review';
 import Clogin from './components/client/Clogin';
 import Cregister from './components/client/Cregister';
+import Test from './components/client/test';
+import Dashboard from './components/admin/Dashboard';
+import Aorder from './components/admin/Aorder';
 function App() {
   return (
     <Router>
@@ -26,11 +29,17 @@ function App() {
         <Route path="/cregister">
           <Cregister/>
         </Route>
-        <Route path="/dashboard">
+        <Route path="/cdashboard">
           <Client/>
         </Route>
+        <Route path="/OrderView/:id">
+          <Aorder/>
+        </Route>
+        <Route path="/OrderDashboard">
+          <Dashboard/>
+        </Route>
         <Route path="/admin">
-          <Admin/>
+          <Alogin/>
         </Route>
         <Route path="/pickupadd">
           <Pickupadd/>
@@ -50,7 +59,9 @@ function App() {
         <Route path="/review">
           <Review/>
         </Route>
-        
+        <Route path="/test">
+          <Test/>
+        </Route>
         <Route path="/">
           <Home/>
         </Route>

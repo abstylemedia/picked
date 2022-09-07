@@ -28,15 +28,17 @@ const extractAddress = (place) => {
     
 
   const address = {
-    city: "",
-    state: "",
-    zip: "",
+    streetnumber: "",
+    streername: "",
+    locality : "",
+    state:"",
     country: "",
     plain() {
-      const city = this.city ? this.city + ", " : "";
-      const zip = this.zip ? this.zip + ", " : "";
+      const streetnumber = this.streetnumber? this.streetnumber + ", " : "";
+      const streername = this.streername ? this.streername + ", " : "";
+      const locality  = this.locality  ? this.locality  + ", " : "";
       const state = this.state ? this.state + ", " : "";
-      return city + zip + state + this.country;
+      return streetnumber + streername + locality + state + this.country;
     }
   }
 
@@ -48,30 +50,34 @@ const extractAddress = (place) => {
   place.address_components.forEach(component => {
     const types = component.types;
     const value = component.long_name;
+    const svalue = component.short_name;
+
+    if (types.includes("street_number")) {
+      address.streetnumber = value;
+    }
+
+    if (types.includes("route")) {
+      address.streername = value;
+    }
 
     if (types.includes("locality")) {
-      address.city = value;
+      address.locality = value;
     }
-
     if (types.includes("administrative_area_level_1")) {
-      address.state = value;
+      address.state = svalue;
     }
-
-    if (types.includes("postal_code")) {
-      address.zip = value;
-    }
-
     if (types.includes("country")) {
       address.country = value;
     }
 
   });
   console.log(address);
-  const location =[address.city, address.state, address.zip, address.country];
+  const location =[address.streetnumber, address.streername, address.locality, address.state, address.country];
   sessionStorage.setItem('droplocation',location);
-  sessionStorage.setItem('dropcity',address.city);
+  sessionStorage.setItem('dropstreetnumber',address.streetnumber);
+  sessionStorage.setItem('dropstreername',address.streername);
+  sessionStorage.setItem('droplocality',address.locality);
   sessionStorage.setItem('dropstate',address.state);
-  sessionStorage.setItem('dropzip',address.zip);
   sessionStorage.setItem('dropcountry',address.country);
   
   return address;

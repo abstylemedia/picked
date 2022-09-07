@@ -84,13 +84,13 @@ export default class Dropadd extends Component {
                         <p className=" font-bold ">Enter Drop Location:</p>
                         <div className="mt-2 px-4 border-2 rounded">
                             <p className="text-gray-500">Pick Up Location:</p>
-                            <p className="font-bold">{sessionStorage.getItem('pickcity')}</p>
-                            <p>{sessionStorage.getItem('pickstate')}, {sessionStorage.getItem('pickzip')}, {sessionStorage.getItem('pickcountry')} </p>
+                            <p className="font-bold">{sessionStorage.getItem('pickstreetnumber')} {sessionStorage.getItem('pickstreername')}</p>
+                    <p>{sessionStorage.getItem('picklocality')}, {sessionStorage.getItem('pickstate')}, {sessionStorage.getItem('pickcountry')} </p>
                         </div>
                         <div className="mt-2 px-4 border-2 rounded">
                             <p className="text-gray-500">Drop Location:</p>
-                            <p className="font-bold">{sessionStorage.getItem('dropcity')}</p>
-                            <p>{sessionStorage.getItem('dropstate')}, {sessionStorage.getItem('dropzip')}, {sessionStorage.getItem('dropcountry')} </p>
+                            <p className="font-bold">{sessionStorage.getItem('dropstreetnumber')} {sessionStorage.getItem('dropstreername')}</p>
+                            <p>{sessionStorage.getItem('droplocality')}, {sessionStorage.getItem('dropstate')}, {sessionStorage.getItem('dropcountry')} </p>
                         </div>
                         <p className=" font-bold mt-2">Type of Location:</p>
                         <div className="border mt-2 rounded-2xl flex">
@@ -110,7 +110,7 @@ export default class Dropadd extends Component {
                         <form className="mt-4">
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="relative z-0 mb-6 w-full group">
-                                    <input type="text" name="floating_phone" id="floating_phone" onChange={ (e) => this.setState({ unit: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Unit/Suite Number" required />
+                                    <input type="number" name="floating_phone" id="floating_phone" onChange={ (e) => this.setState({ unit: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Unit/Suite Number" required />
                                 </div>
                                 <div className="relative z-0 mb-6 w-full group">
                                     <input type="text" name="floating_company" id="floating_company" 
