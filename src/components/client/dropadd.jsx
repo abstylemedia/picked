@@ -131,7 +131,7 @@ export default class Dropadd extends Component {
                 flex flex-col justify-center
                 ">
                    <div className="basis-full"> 
-                    <button className="w-1/2 py-2">
+                    <button onClick={() => sessionStorage.clear()} className="w-1/2 py-2">
                        Cancel Order
                     </button>
                     <button onClick={this.clicked} className="w-1/2 py-2 bg-blue-500 text-white">

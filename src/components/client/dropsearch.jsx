@@ -152,7 +152,7 @@ export default function Dropsearch () {
     return(
         <section className="bg-slate-100 h-screen">
             <nav className="w-screen py-5 text-center bg-blue-500 text-white">
-                Pick Up Location
+                Drop Off Location
             </nav>
             <div className="mt-3 mb-9">
                 <div className="p-2 px-4">
