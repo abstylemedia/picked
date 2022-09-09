@@ -173,6 +173,7 @@ export default function Pickserach () {
                             </div>
                             <div className="absolute top-0  text-center mt-14  text-xs font-medium uppercase text-blue-600">Drop Off Location</div>
                         </div>
+                        
                         <div className="flex-auto border-t-2 transition duration-500 ease-in-out border-blue-600"></div>
                         <div className="flex justify-center items-center broder-blue-500 relative">
                             <div className="rounded-full transition duration-500 ease-in-out h-12 w-12 py-3 border-2 border-blue-500">

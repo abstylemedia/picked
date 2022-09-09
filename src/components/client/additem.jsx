@@ -75,14 +75,26 @@ export default class additem extends Component {
                         <div className="relative z-0 mb-6 w-full pb-4 flex">
                             <div className="basis-full md:basis-1/2  text-center flex items-center">
                                 <p className="" >Dimensions:</p>
-                                <div className="border rounded-2xl basis-1/2  flex ">
-                                    <button value="CM" onClick={(e)=>this.setState({ dimensions: e.target.value})}className="basis-1/2 focus:bg-black rounded-2xl focus:text-white py-1" >
-                                        CM
-                                    </button>
-                                    <button value="Inch" onClick={(e)=>this.setState({ dimensions: e.target.value})}className="basis-1/2 focus:bg-black rounded-2xl focus:text-white py-1" >
-                                        Inch
-                                    </button>
-                                </div>
+                                <ul className="border rounded-2xl basis-1/2  flex ">  
+                                    <li className='rounded-2xl basis-1/2'>
+                                        <input type="radio" id="CM" name="Dimensions" onClick={(e)=>this.setState({ dimensions: e.target.value})} value="CM" class="hidden peer" required="" />
+                                        <label for="CM" class="inline-flex justify-between items-center w-full text-gray-500 rounded-2xl cursor-pointer  peer-checked:bg-black peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 h-full">                           
+                                            <div class="block w-full">
+                                                <div class="w-full text-lg text-center font-semibold">CM</div>
+                                            </div>
+
+                                        </label>
+                                    </li>
+                                    <li className='rounded-2xl basis-1/2'>
+                                        <input type="radio" id="Inch" name="Dimensions" onClick={(e)=>this.setState({ dimensions: e.target.value})} value="Inch" class="hidden peer" required="" />
+                                        <label for="Inch" class="inline-flex justify-between items-center w-full text-gray-500  rounded-2xl cursor-pointer  peer-checked:bg-black peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 h-full">                           
+                                            <div class="block w-full">
+                                                <div class="w-full text-lg text-center font-semibold">Inch</div>
+                                            </div>
+
+                                        </label>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-6 border-b-2">
@@ -102,14 +114,26 @@ export default class additem extends Component {
                         <div className="relative z-0 mb-6 w-full mt-5 pb-4 border-b-2 flex">
                             <div className="basis-full md:basis-1/2  text-center flex items-center">
                                 <p>Weight:</p>
-                                <div className="border rounded-2xl basis-1/2  flex ">
-                                    <button value="LB" onClick={(e)=>this.setState({ weight: e.target.value})} className="basis-1/2 hover:bg-black focus:bg-black rounded-2xl hover:text-white  focus:text-white py-1" >
-                                        LB
-                                    </button>
-                                    <button value="KG" onClick={(e)=>this.setState({ weight: e.target.value})} className="basis-1/2 peer-checked:block hover:bg-black  focus:bg-black rounded-2xl focus:text-white hover:text-white active:bg-black active:text-white py-1" >
-                                      KG 
-                                    </button>
-                                </div>
+                                <ul className="border rounded-2xl basis-1/2  flex ">
+                                    <li className='rounded-2xl basis-1/2'>
+                                        <input type="radio" id="LB" name="weight" onClick={(e)=>this.setState({ weight: e.target.value})} value="LB" class="hidden peer" required="" />
+                                        <label for="LB" class="inline-flex justify-between items-center w-full text-gray-500 rounded-2xl cursor-pointer  peer-checked:bg-black peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 h-full">                           
+                                            <div class="block w-full">
+                                                <div class="w-full text-lg text-center font-semibold">LB</div>
+                                            </div>
+
+                                        </label>
+                                    </li>
+                                    <li className='rounded-2xl basis-1/2'>
+                                        <input type="radio" id="KG" name="weight" onClick={(e)=>this.setState({ weight: e.target.value})} value="KG" class="hidden peer" required="" />
+                                        <label for="KG" class="inline-flex justify-between items-center w-full text-gray-500  rounded-2xl cursor-pointer  peer-checked:bg-black peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 h-full">                           
+                                            <div class="block w-full">
+                                                <div class="w-full text-lg text-center font-semibold">KG</div>
+                                            </div>
+
+                                        </label>
+                                    </li>  
+                                </ul>
                                 <div className="flex w-full ">
                                 <input type="tel" onChange={(e)=>this.setState({ weightn: e.target.value})} className=" w-full text-center text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600  " />
                                 </div>
