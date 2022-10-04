@@ -5,8 +5,6 @@ const Main = () =>{
     e.preventDefault()
     if(data !==""){
       if(data !== undefined){
-        
-        console.log(data);
         sessionStorage.setItem('category', data);
         window.location.href = "/pickserach";
         }

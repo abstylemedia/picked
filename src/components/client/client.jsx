@@ -8,9 +8,8 @@ const Client = () =>{
     
     return(
         <div >
-      <Main/>
-      
-    </div>
+          <Main/>
+        </div>
     )
 };
 export default Client;

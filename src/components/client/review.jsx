@@ -1,15 +1,37 @@
+
 import React, { Component } from "react";
 import axios from "axios";
 export default class Review extends Component {
     componentDidMount(){
         if (!sessionStorage.getItem('droplocation')){
-            window.location.href = "/dropsearch";
+         window.location.href = "/category";
         }
+        if (sessionStorage.getItem('km')) {
+            const km =sessionStorage.getItem('km');
+            const wg =sessionStorage.getItem('weightn');
+            
+            const perkm = 10;
+            const totalkm = (km * perkm);
+            
+            const perwg= 10
+            const totalwg=(wg * perwg);
+            
+            const total= totalkm + totalwg;
+           
+            const gst = (total * 0.18);
+            
+            const subtotal = total + gst;
+            
+            sessionStorage.setItem('total', total);
+            sessionStorage.setItem('gst', gst);
+            sessionStorage.setItem('subtotal', subtotal)
+          }
     }
     constructor(props) {
         
         super(props);
         this.state = {
+            email: localStorage.getItem('useremail'),
             category : sessionStorage.getItem('category'),
             picksearch: sessionStorage.getItem('pickuplocation'),
             pickuptype: sessionStorage.getItem('picktype'),
@@ -67,20 +89,25 @@ export default class Review extends Component {
                 </div>
                 <div className="mt-8 flex justify-center">
                     <div className="rounded-md bg-white w-2/3 flex justify-center items-center">
-                        <label for="dropzone-file" class="flex flex-col justify-center items-center w-full  rounded-lg  cursor-pointer hover:bg-gray-100">
-                            <div class="flex flex-col justify-center items-center ">
-                                <p class="text-gray-500 py-4">Add Receipt & Item Picture</p>
+                        <label for="dropzone-file" className="flex flex-col justify-center items-center w-full  rounded-lg  cursor-pointer hover:bg-gray-100">
+                            <div className="flex flex-col justify-center items-center ">
+                                <p className="text-gray-500 py-4">Add Receipt & Item Picture</p>
                             </div>
-                            <input id="dropzone-file" type="file" class="hidden" onChange={({ base64 })=>this.setState({selectedFile: base64 })}/>
+                            <input id="dropzone-file" type="file" className="hidden" onChange={({ base64 })=>this.setState({selectedFile: base64 })}/>
                         </label>
                     </div>
                 </div>
                 <p className="font-bold">Contact Info:</p>
                 <div className=" rounded-md bg-white py-5 px-5 flex flex-col content-start">
-                    <p className="text-gray-500 my-1"><span className="font-bold ">Phone Number:</span> {sessionStorage.getItem('dimensions')}</p>
+                    <p className="text-gray-500 my-1"><span className="font-bold ">Phone Number: {sessionStorage.getItem('total')}</span> </p>
                     <p className="text-gray-500 flex space-x-9 my-1"><span>Length: {sessionStorage.getItem('length')}</span> <span>Width: {sessionStorage.getItem('width')}</span>  <span>Height {sessionStorage.getItem('height')}</span></p>
                     <p className="text-gray-500 my-1"><span className="font-bold text-black">Dimensions:</span> {sessionStorage.getItem('weight')}</p>
                     <p className="text-gray-500 my-1">Weight: {sessionStorage.getItem('weightn')}</p> 
+                </div>
+                <div className=" rounded-md bg-white py-5 px-5 mt-2 flex flex-col content-start">
+                    <p className="font-bold flex justify-between my-1"><span>Sub Total:</span>  <span className="text-gray-500 font-normal">{sessionStorage.getItem('total')}</span></p> 
+                    <p className="font-bold flex justify-between my-1"><span>Gst:</span>  <span className="text-gray-500 font-normal">{sessionStorage.getItem('gst')}</span></p>
+                    <p className="font-bold flex border-t-2 justify-between my-1"><span>Total:</span>  <span className="text-gray-500 font-normal">{sessionStorage.getItem('subtotal')}</span></p>
                 </div>
             </div>
             <footer className="w-full bg-white fixed left-0 bottom-0 flex flex-col justify-center">
@@ -96,5 +123,5 @@ export default class Review extends Component {
             
         </section>
     )
-};
+    };
 }

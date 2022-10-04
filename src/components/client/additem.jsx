@@ -3,9 +3,9 @@ import Modal from './modal';
 
 export default class additem extends Component {
     componentDidMount(){
-        //if (!sessionStorage.getItem('droplocation')){
-            //window.location.href = "/dropsearch";
-        //}
+        if (!sessionStorage.getItem('droplocation')){
+            window.location.href = "/category";
+        }
     }
     constructor(props) {
         super(props);
@@ -146,7 +146,6 @@ export default class additem extends Component {
                         </div>
                     </div>
                 </div>
-                
                 <Modal show={this.state.show} >
                     <div className="border flex flex-col py-2" > 
                         <h1 className="text-4xl font-bold text-center my-2">Deliver Options</h1>
@@ -158,7 +157,6 @@ export default class additem extends Component {
                                 </label>
                                  <input value="Drop-off at the front door" onClick={(e)=>this.setState({ type: e.target.value})} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left ml-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                             </div>
-
                             <div className="form-check flex justify-center items-center my-2">
                                 <label className="form-check-label w-1/2 inline-block text-gray-800" for="flexRadioDefault2">
                                 <span className="font-bold">Safe drop-off:</span> Someone will be present at the Delivery Location to receive the package.
@@ -170,11 +168,9 @@ export default class additem extends Component {
                             <button onClick={this.clicked} className="w-1/3 py-4 bg-blue-500 text-white rounded px-3 ">
                                     Add Item
                             </button>
-                        </div>
-                            
+                        </div>       
                     </div>
                 </Modal>
-      
             </section>
             </>
         )

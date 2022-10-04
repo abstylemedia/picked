@@ -22,8 +22,15 @@ export default class Clogin extends Component {
             .then( res => {
                 
                 localStorage.setItem('my-key', res.data.token);
-                if (res.data.message == "ok"){
-                    window.location.href = "/cdashboard";
+                localStorage.setItem('userfname', res.data.data.fname);
+                localStorage.setItem('userlname', res.data.data.lname);
+                localStorage.setItem('useremail', res.data.data.email);
+                localStorage.setItem('userphone', res.data.data.phone);
+                localStorage.setItem('password', res.data.data.password);
+                if (res.data.message === "ok"){
+                    window.location.href = "/cdashboardp";
+                    
+                    
                 }else{
                     alert("User Not Found")
                 }

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-export default class Pickupadd extends Component {
+export default class PickupaddResidential extends Component {
     componentDidMount(){
         if (!sessionStorage.getItem('pickuplocation')){
-            window.location.href = "/pickserach";
+            window.location.href = "/category";
         }
         
     }
@@ -14,19 +14,19 @@ export default class Pickupadd extends Component {
         unit:"",
         buzzer:"",
         additional:"",
-          
+        type:"Residential",
         };
         this.clicked = this.clicked.bind(this);
     }
     clicked(e){
         e.preventDefault(); 
-        if(this.state.unit && this.state.buzzer && this.state.additional &&  this.state.button  !==""){
+        if(this.state.unit && this.state.buzzer && this.state.additional &&  this.state.type  !==""){
         sessionStorage.setItem('pickunit', this.state.unit);
         sessionStorage.setItem('pickbuzzer', this.state.buzzer);
         sessionStorage.setItem('pickadd', this.state.additional);
-        sessionStorage.setItem('pickbutton',this.state.button);
+        sessionStorage.setItem('picktype',this.state.type);
         
-        window.location.href = "/dropsearch";
+        window.location.href = "/dropadd";
         }
         else{
             alert("not add");
@@ -85,19 +85,19 @@ export default class Pickupadd extends Component {
                     <p className=" font-bold ">Enter Pick Up Location:</p>
                     <div className="mt-2 px-4 border-2 rounded">
                     <p className="text-gray-500">Pick Up Location:</p>
-                    <p className="font-bold">{sessionStorage.getItem('pickstreetnumber')} {sessionStorage.getItem('pickstreername')}</p>
-                    <p>{sessionStorage.getItem('picklocality')}, {sessionStorage.getItem('pickstate')}, {sessionStorage.getItem('pickcountry')} </p>
+                    <p className="font-bold">{sessionStorage.getItem('pickuplocation')}</p>
+                    
                     </div>
                     
                     <p className=" font-bold mt-2">Type of Location:</p>
                     <div className="border mt-2 rounded-2xl flex">
-                        <button className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
+                        <button onClick={() =>window.location.href = "/pickupaddr"} className="basis-1/3 bg-black rounded-2xl text-white py-1" >
                             Residential
                         </button>
-                        <button className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
+                        <button onClick={() =>window.location.href = "/pickupaddc"} className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
                             Commerical
                         </button>
-                        <button className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
+                        <button onClick={() =>window.location.href = "/pickupaddre"} className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
                             Retail
                         </button>
                     </div>
@@ -111,7 +111,7 @@ export default class Pickupadd extends Component {
                             </div>
                         </div>
                         <div className="relative z-0 mb-6 w-full group">
-                            <textarea type="text" onChange={ (e) => this.setState({ additional: e.target.value})}  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Additional Details:(e.g. drop off at concierge)" required ></textarea>
+                            <textarea type="text" onChange={ (e) => this.setState({ additional: e.target.value})}  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Additional Details:(e.g. drop off at concierge)" required ></textarea>
                         </div>
                     </form>
                 </div>

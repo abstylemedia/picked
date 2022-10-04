@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 export default class Dropadd extends Component {
     componentDidMount(){
-        if (!sessionStorage.getItem('droplocation')){
-            window.location.href = "/dropsearch";
+        if (!sessionStorage.getItem('pickuplocation')){
+            window.location.href = "/category";
         }
     }
     constructor(props) {
