@@ -7,13 +7,13 @@ export default function Dashboardo () {
         if (!localStorage.getItem('my-key')){
             window.location.href = "/Client";
         }
-        const  status  = 'Pending';
+        
         const [users, setUsers] = useState([]);
         useEffect(() => {
             UsersGet()
           }, [])
           const UsersGet = () => {
-            axios.get("https://pickedapi.herokuapp.com/ordersc/"+status)
+            axios.get("https://pickedapi.herokuapp.com/order")
             .then(res =>  {
                 setUsers(res.data);
                   console.log(res.data);
@@ -47,26 +47,28 @@ export default function Dashboardo () {
                                 </tr>
                             </thead>
                             <tbody>
-                            {users.map((user) => (
+                            {users.map((element) => {
+                            return element.status === "Delivered" ?
                             <tr >
                               <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-center">
-                              {user._id}
+                              {element._id}
                               </th>
                               <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-center">
-                              {user.category}
+                              {element.category}
                               </th>
                               <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-center">
-                                  <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{user.status}
+                                  <i className="fas fa-circle fa-sm text-orange-500 mr-2"></i>{element.status}
                                   
                               </th>
                               <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-center">
-                              {user.itemname}
+                              {element.itemname}
                               </th>
                               <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-center">
-                              {user.createdAt}
+                              {element.createdAt}
                               </th>
                             </tr>
-                            ))}
+: null;
+})}
                             </tbody>
                         </table>
                 </div>
