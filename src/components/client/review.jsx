@@ -6,26 +6,7 @@ export default class Review extends Component {
         if (!sessionStorage.getItem('droplocation')){
          window.location.href = "/category";
         }
-        if (sessionStorage.getItem('km')) {
-            const km =sessionStorage.getItem('km');
-            const wg =sessionStorage.getItem('weightn');
-            
-            const perkm = 10;
-            const totalkm = (km * perkm);
-            
-            const perwg= 10
-            const totalwg=(wg * perwg);
-            
-            const total= totalkm + totalwg;
-           
-            const gst = (total * 0.18);
-            
-            const subtotal = total + gst;
-            
-            sessionStorage.setItem('total', total);
-            sessionStorage.setItem('gst', gst);
-            sessionStorage.setItem('subtotal', subtotal)
-          }
+        
     }
     constructor(props) {
         
@@ -55,7 +36,8 @@ export default class Review extends Component {
         axios.post("https://pickedapi.herokuapp.com/order", this.state)
         .then( res => {
             alert(res.data.message);
-            sessionStorage.clear()
+            sessionStorage.clear();
+            window.location.reload();
         })
         
     }
@@ -71,13 +53,11 @@ export default class Review extends Component {
                 <p className="font-bold my-2">Location:</p>
                 <div className=" rounded-md bg-white py-5 px-5 mt-2 flex flex-col">
                     <p className="text-gray-500 my-1">Pick Up Location:</p>
-                    <p className="font-bold my-1">{sessionStorage.getItem('pickcity')}</p>
-                    <p className="my-1">{sessionStorage.getItem('pickstate')}, {sessionStorage.getItem('pickzip')}, {sessionStorage.getItem('pickcountry')}</p> 
+                    <p className="font-bold">{sessionStorage.getItem('pickuplocation')}</p> 
                 </div>
                 <div className="rounded-md mt-2 bg-white py-5 px-5 mb-4 flex flex-col">
                     <p className="text-gray-500 my-1">Drop Off Location:</p>
-                    <p className="font-bold my-1">{sessionStorage.getItem('dropcity')}</p>
-                    <p className="my-1">{sessionStorage.getItem('dropstate')}, {sessionStorage.getItem('dropzip')}, {sessionStorage.getItem('dropcountry')}</p> 
+                    <p className="font-bold">{sessionStorage.getItem('droplocation')}</p> 
                 </div>
                 <p className="font-bold">Total Items:</p>
                 <div className=" rounded-md bg-white py-5 px-5 flex flex-col content-start">
@@ -99,10 +79,9 @@ export default class Review extends Component {
                 </div>
                 <p className="font-bold">Contact Info:</p>
                 <div className=" rounded-md bg-white py-5 px-5 flex flex-col content-start">
-                    <p className="text-gray-500 my-1"><span className="font-bold ">Phone Number: {sessionStorage.getItem('total')}</span> </p>
-                    <p className="text-gray-500 flex space-x-9 my-1"><span>Length: {sessionStorage.getItem('length')}</span> <span>Width: {sessionStorage.getItem('width')}</span>  <span>Height {sessionStorage.getItem('height')}</span></p>
-                    <p className="text-gray-500 my-1"><span className="font-bold text-black">Dimensions:</span> {sessionStorage.getItem('weight')}</p>
-                    <p className="text-gray-500 my-1">Weight: {sessionStorage.getItem('weightn')}</p> 
+                    <p className="text-gray-500 my-1"><span className="font-bold text-black">Phone Number:</span> {localStorage.getItem('userphone')}</p>
+                    <p className="text-gray-500 my-1"><span className="font-bold text-black">Email:</span> {localStorage.getItem('useremail')}</p>
+                     
                 </div>
                 <div className=" rounded-md bg-white py-5 px-5 mt-2 flex flex-col content-start">
                     <p className="font-bold flex justify-between my-1"><span>Sub Total:</span>  <span className="text-gray-500 font-normal">{sessionStorage.getItem('total')}</span></p> 

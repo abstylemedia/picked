@@ -1,6 +1,10 @@
 import {React} from 'react';
 export default function Clientnav() {
-
+ function logout (e){
+    e.preventDefault();
+    localStorage.clear();
+            window.location.reload();
+ }
   return (
     <>
         <section className='bg-gray-200 '>
@@ -22,11 +26,13 @@ export default function Clientnav() {
                     </button>
                     
                 </div>
-                <button onClick={() => window.location.href = "/category"} className="w-full rounded-lg bg-blue-600 shadow-md mt-2">
-                    <div className="flex flex-col items-center py-4">
-                        <h5 className="mb-1 text-xl font-medium text-white">Place New Order</h5>
-                    </div>
-                </button>
+                <div className="grid gap-x-4 gap-y-8 grid-cols-2 mt-9 border  ">
+                    <button onClick={() => window.location.href = "/category"}  className="w-full bg-blue-600 rounded-lg shadow-md  flex flex-col items-center py-4 mb-1 text-xl font-medium text-white">Place New Order</button>
+                    
+                    <button  onClick={logout} className="w-full  bg-blue-600 rounded-lg shadow-md flex flex-col items-center py-4 mb-1 text-xl font-medium text-white">Logout</button>
+                    
+                </div>
+                
                 
             </div>
             </div>   

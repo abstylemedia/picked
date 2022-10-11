@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import Alogin from './components/admin/Alogin';
 import Home from './components/home/home';
-import Dropadd from './components/client/dropadd';
 import Additem from './components/client/additem';
 import Pickserach from './components/client/picksearch';
 import Review from './components/client/review';
@@ -21,6 +20,9 @@ import PickupaddRetail from './components/client/pickupaddre';
 import PickupaddCommerical from './components/client/pickupaddc';
 import Dashboardo from './components/client/Dashboardo';
 import Dashboardp from './components/client/Dashbaordp';
+import DropaddResidential from './components/client/dropaddr';
+import DropaddCommerical from './components/client/dropaddc';
+import Schedule from './components/client/schedule';
 function App() {
   return (
     <Router>
@@ -36,6 +38,9 @@ function App() {
         </Route>
         <Route path="/cdashboardo">
           <Dashboardo/>
+        </Route>
+        <Route path="/schedule">
+          <Schedule/>
         </Route>
         <Route path="/cdashboardp">
           <Dashboardp/>
@@ -58,8 +63,11 @@ function App() {
         <Route path="/pickupaddc">
           <PickupaddCommerical/>
         </Route>
-        <Route path="/dropadd">
-          <Dropadd/>
+        <Route path="/dropaddr">
+          <DropaddResidential/>
+        </Route>
+        <Route path="/dropaddc">
+          <DropaddCommerical/>
         </Route>
         <Route path="/additem">
           <Additem/>

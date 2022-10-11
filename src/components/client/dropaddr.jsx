@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-export default class Dropadd extends Component {
+export default class DropaddResidential extends Component {
     componentDidMount(){
         if (!sessionStorage.getItem('pickuplocation')){
             window.location.href = "/category";
@@ -9,13 +9,13 @@ export default class Dropadd extends Component {
         
         super(props);
         this.state = {
-        
-        unit:"",
-        buzzer:"",
-        additional:"",
-        button:"",
-        };
+            unit:"",
+            buzzer:"",
+            additional:"",
+            type:"Residential",
+            };
         this.clicked = this.clicked.bind(this);
+        this.cancel = this.cancel.bind(this);
     }
     clicked(e){
         e.preventDefault(); 
@@ -24,13 +24,18 @@ export default class Dropadd extends Component {
             sessionStorage.setItem('dropunit', this.state.unit);
             sessionStorage.setItem('dropbuzzer', this.state.buzzer);
             sessionStorage.setItem('dropadd', this.state.additional);
-            sessionStorage.setItem('droptype',this.state.button);
+            sessionStorage.setItem('droptype',this.state.type);
 
             window.location.href = "/additem";
         }
         else{
             alert("not add");
         }
+    }
+    cancel(e){
+        e.preventDefault();
+        sessionStorage.clear();
+            window.location.reload();
     }
     render(){
         return(
@@ -84,46 +89,36 @@ export default class Dropadd extends Component {
                         <p className=" font-bold ">Locations:</p>
                         <div className="mt-2 px-4 border-2 rounded">
                             <p className="text-gray-500">Pick Up Location:</p>
-                            <p className="font-bold">{sessionStorage.getItem('pickstreetnumber')} {sessionStorage.getItem('pickstreername')}</p>
-                    <p>{sessionStorage.getItem('picklocality')}, {sessionStorage.getItem('pickstate')}, {sessionStorage.getItem('pickcountry')} </p>
+                            <p className="font-bold">{sessionStorage.getItem('pickuplocation')}</p>
                         </div>
                         <div className="mt-2 px-4 border-2 rounded">
                             <p className="text-gray-500">Drop Location:</p>
-                            <p className="font-bold">{sessionStorage.getItem('dropstreetnumber')} {sessionStorage.getItem('dropstreername')}</p>
-                            <p>{sessionStorage.getItem('droplocality')}, {sessionStorage.getItem('dropstate')}, {sessionStorage.getItem('dropcountry')} </p>
+                            <p className="font-bold">{sessionStorage.getItem('droplocation')}</p>
                         </div>
                         <p className=" font-bold mt-2">Type of Location:</p>
                         <div className="border mt-2 rounded-2xl flex">
-                            <button value="Residential" onClick={(e)=>this.setState({ button: e.target.value})} 
-                            className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
+                            <button value="Residential" onClick={() =>window.location.href = "/dropaddr"} 
+                            className="basis-1/3 bg-black rounded-2xl text-white py-1" >
                                 Residential
                             </button>
-                            <button value="Commerical" onClick={(e)=>this.setState({ button: e.target.value})}
+                            <button value="Commerical" onClick={() =>window.location.href = "/dropaddc"}
                             className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
                                 Commerical
                             </button>
-                            <button value="Retail" onClick={(e)=>this.setState({ button: e.target.value})} 
-                            className="basis-1/3 focus:bg-black rounded-2xl focus:text-white py-1" >
-                                Retail
-                            </button>
                         </div>
                         <form className="mt-4">
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="relative z-0 mb-6 w-full group">
-                                    <input type="number" name="floating_phone" id="floating_phone" onChange={ (e) => this.setState({ unit: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Unit/Suite Number" required />
-                                </div>
-                                <div className="relative z-0 mb-6 w-full group">
-                                    <input type="text" name="floating_company" id="floating_company" 
-                                    onChange={ (e) => this.setState({ buzzer: e.target.value})} 
-                                    className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Buzzer#" required />
-                                </div>
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="relative z-0 mb-6 w-full group">
+                                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  onChange={ (e) => this.setState({ unit: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Unit/Suite Number" required />
                             </div>
                             <div className="relative z-0 mb-6 w-full group">
-                                <textarea type="email" 
-                                onChange={ (e) => this.setState({ additional: e.target.value})} 
-                                name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Additional Details:(e.g. drop off at concierge)" required ></textarea>
+                                <input type="tel"  onChange={ (e) => this.setState({ buzzer: e.target.value})} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Buzzer#" required />
                             </div>
-                        </form>
+                        </div>
+                        <div className="relative z-0 mb-6 w-full group">
+                            <textarea type="text" onChange={ (e) => this.setState({ additional: e.target.value})}  className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Additional Details:(e.g. drop off at concierge)" required ></textarea>
+                        </div>
+                    </form>
                     </div>
                 </div>
                 <footer className="w-full  bg-white
@@ -131,7 +126,7 @@ export default class Dropadd extends Component {
                 flex flex-col justify-center
                 ">
                    <div className="basis-full"> 
-                    <button onClick={() => sessionStorage.clear()} className="w-1/2 py-2">
+                    <button onClick={this.cancel} className="w-1/2 py-2">
                        Cancel Order
                     </button>
                     <button onClick={this.clicked} className="w-1/2 py-2 bg-blue-500 text-white">

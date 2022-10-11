@@ -13,6 +13,7 @@ export default function  Aorder (){
   const [status, setstatus] = useState("")
   useEffect(() => {
     UsersGet()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
  
   const UsersGet = () => {

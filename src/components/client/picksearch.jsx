@@ -11,7 +11,7 @@ const apiKey = 'AIzaSyAQY7fjJ4hLUgiy-RIKeLwiKJptVRnGzEI';
 
 export default function Pickserach () {
     if (!sessionStorage.getItem('category')){
-        window.location.href = "/cdashboard";
+        window.location.href = "/category";
     }
   const { isLoaded }=useJsApiLoader({
     googleMapsApiKey: apiKey,
@@ -50,9 +50,13 @@ export default function Pickserach () {
     const dis= results.routes[0].legs[0].distance.text
     const diss=dis.replace("km", "")
     sessionStorage.setItem('km', diss);
+    
     window.location.href = "/pickupaddr";
   }
-
+  function cancel(){
+    sessionStorage.clear();
+            window.location.reload();
+  }
    
     return(
         <section className="bg-slate-100 h-screen">
@@ -135,7 +139,7 @@ export default function Pickserach () {
             flex flex-col justify-center
             ">
                <div className="basis-full"> 
-                <button onClick={() => sessionStorage.clear()} className="w-1/2 py-2">
+                <button onClick={cancel} className="w-1/2 py-2">
                    Cancel Order
                 </button>
                 <button onClick={calculateRoute} className="w-1/2 py-2 bg-blue-500 text-white">

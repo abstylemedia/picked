@@ -49,7 +49,31 @@ export default class additem extends Component {
             sessionStorage.setItem('weightn',this.state.weightn);
             sessionStorage.setItem('dropbutton',this.state.button);
             sessionStorage.setItem('deliverytype',this.state.type);
-            window.location.href = "/review";
+            
+            if (sessionStorage.getItem('km')) {
+                const km =sessionStorage.getItem('km');
+                const wg =sessionStorage.getItem('weightn');
+                console.log(km);
+                console.log(wg);
+                const perkm = 10;
+                const totalkm = (km * perkm);
+                
+                const perwg= 10
+                const totalwg=(wg * perwg);
+                
+                const total= totalkm + totalwg;
+               
+                const gst = (total * 0.18);
+                
+                const subtotal = total + gst;
+                console.log(total);
+                console.log(gst);
+                console.log(subtotal);
+                sessionStorage.setItem('total', total);
+                sessionStorage.setItem('gst', gst);
+                sessionStorage.setItem('subtotal', subtotal);
+                window.location.href = "/review";
+              }
         }
         else{
             alert("not add");

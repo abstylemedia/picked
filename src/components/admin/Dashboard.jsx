@@ -3,9 +3,9 @@ import Sidebar from "./Sidebar";
 import axios from 'axios';
 
 export default function   Dashboard (){
-  // if (!localStorage.getItem('admin-key')){
-  //   window.location.href = "/admin";
-  // }
+   if (!localStorage.getItem('admin-key')){
+     window.location.href = "/admin";
+   }
    const [users, setUsers] = useState([]);
    const [setuser, updatesetUsers] = useState([]);
   
@@ -24,9 +24,9 @@ export default function   Dashboard (){
     UsersGet()
    }, [])
    
-  // const UpdateUser = id => {
-  //   window.location = '/OrderView/'+id
-  // }
+   const UpdateUser = id => {
+     window.location = '/OrderView/'+id
+   }
    const dataClick = (status) =>{
     let new_data = users.filter(name => name.status === status)
     updatesetUsers(new_data)
@@ -42,15 +42,15 @@ export default function   Dashboard (){
                     <h2 className="text-white text-2xl ">Order Table</h2>
                    
                 </div>
-                <div className=" bg-slate-300 flex py-3 justify-around text-center" >
-                  <button onClick={() => dataClick('Pending')} className=" w-44 bg-red-500 rounded-lg items-center justify-center gap-4 text-sm font-light py-3">
+                <div className=" bg-slate-300 grid gap-x-2 gap-y-4 grid-cols-3 py-3 px-2  text-center" >
+                  <button onClick={() => dataClick('Pending')} className=" w-full bg-red-500 rounded-lg items-center justify-center text-sm font-light py-3">
                   Pending
                   </button>
                   
-                  <button onClick={() => dataClick('Canceled')} className="w-44 bg-blue-500 rounded-lg items-center justify-center gap-4 text-sm font-light py-3">
+                  <button onClick={() => dataClick('Canceled')} className="w-full bg-blue-500 rounded-lg items-center justify-center  text-sm font-light py-3">
                   Cancelled
                   </button>
-                  <button  onClick={() => dataClick('Delivered')}className="w-44 bg-green-500 rounded-lg items-center justify-center gap-4 text-sm font-light py-3">
+                  <button  onClick={() => dataClick('Delivered')}className="w-fullß bg-green-500 rounded-lg items-center justify-center  text-sm font-light py-3">
                    Delivered
                   </button>
                 </div>
@@ -97,6 +97,9 @@ export default function   Dashboard (){
                               </th>
                               <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-center">
                                 {user.createdAt}
+                              </th >
+                              <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-center">
+                              <button className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" onClick={() => UpdateUser(user._id)}>Edit</button>
                               </th>
                               
                              

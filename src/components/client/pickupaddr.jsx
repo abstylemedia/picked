@@ -17,6 +17,7 @@ export default class PickupaddResidential extends Component {
         type:"Residential",
         };
         this.clicked = this.clicked.bind(this);
+        this.cancel = this.cancel.bind(this);
     }
     clicked(e){
         e.preventDefault(); 
@@ -26,11 +27,16 @@ export default class PickupaddResidential extends Component {
         sessionStorage.setItem('pickadd', this.state.additional);
         sessionStorage.setItem('picktype',this.state.type);
         
-        window.location.href = "/dropadd";
+        window.location.href = "/dropaddc";
         }
         else{
             alert("not add");
         }
+    }
+    cancel(e){
+        e.preventDefault();
+        sessionStorage.clear();
+            window.location.reload();
     }
    render(){
     
@@ -121,7 +127,7 @@ export default class PickupaddResidential extends Component {
             flex flex-col justify-center
             ">
                <div className="basis-full"> 
-                <button onClick={() => sessionStorage.clear()} className="w-1/2 py-2">
+                <button onClick={this.cancel} className="w-1/2 py-2">
                    Cancel Order
                 </button>
                 <button onClick={this.clicked} className="w-1/2 py-2 bg-blue-500 text-white">
