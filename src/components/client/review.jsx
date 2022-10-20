@@ -1,47 +1,103 @@
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-export default class Review extends Component {
-    componentDidMount(){
-        if (!sessionStorage.getItem('droplocation')){
-         window.location.href = "/category";
-        }
-        
+import StripeCheckout from "react-stripe-checkout";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
+
+export default function Review () {
+    
+    if (!sessionStorage.getItem('droplocation')){
+     window.location.href = "/category";
     }
-    constructor(props) {
-        
-        super(props);
-        this.state = {
-            email: localStorage.getItem('useremail'),
-            category : sessionStorage.getItem('category'),
-            picksearch: sessionStorage.getItem('pickuplocation'),
-            pickuptype: sessionStorage.getItem('picktype'),
-            pickupunit: sessionStorage.getItem('pickunit'),
-            pickupbuzzer: sessionStorage.getItem('pickbuzzer'),
-            pickupadditional: sessionStorage.getItem('pickadd'),
-            dropsearch: sessionStorage.getItem('droplocation'),
-            droptype: sessionStorage.getItem('droptype'),
-            dropunit: sessionStorage.getItem('dropunit'),
-            dropbuzzer: sessionStorage.getItem('dropbuzzer'),
-            dropadditional: sessionStorage.getItem('dropadd'),
-            itemname:sessionStorage.getItem('itemname'),dimensions:sessionStorage.getItem('dimensions'),dimensionslength:sessionStorage.getItem('length'),dimensionsheight:sessionStorage.getItem('height'),dimensionswidth:sessionStorage.getItem('width'),
-            itemweight:sessionStorage.getItem('weightn'),itemweighttype:sessionStorage.getItem('weight'),delivery:sessionStorage.getItem('deliverytype'),
-            selectedFile: "",
-        };
-        this.clicked = this.clicked.bind(this);
-    }
-    clicked(e){
-        e.preventDefault(); 
-        console.log(this.state);
-        axios.post("https://pickedapi.herokuapp.com/order", this.state)
-        .then( res => {
-            alert(res.data.message);
+    
+    const [email] = useState(localStorage.getItem('useremail'))
+    const [category] = useState(sessionStorage.getItem('category'))
+    const [picksearch] = useState(sessionStorage.getItem('pickuplocation'))
+    const [pickuptype] = useState(sessionStorage.getItem('picktype'))
+    const [pickupunit] = useState(sessionStorage.getItem('pickunit'))
+    const [pickupbuzzer] = useState(sessionStorage.getItem('pickbuzzer'))
+    const [pickupadditional] = useState(sessionStorage.getItem('pickadd'))
+    const [dropsearch] = useState(sessionStorage.getItem('droplocation'))
+    const [droptype] = useState(sessionStorage.getItem('droptype'))
+    const [dropunit] = useState(sessionStorage.getItem('dropunit'))
+    const [dropbuzzer] = useState(sessionStorage.getItem('dropbuzzer'))
+    const [dropadditional] = useState(sessionStorage.getItem('dropadd'))
+    const [itemname] = useState(sessionStorage.getItem('itemname'))
+    const [dimensions] = useState(sessionStorage.getItem('dimensions'))
+    const [dimensionslength] = useState(sessionStorage.getItem('length'))
+    const [dimensionsheight] = useState(sessionStorage.getItem('height'))
+    const [dimensionswidth] = useState(sessionStorage.getItem('width'))
+    const [itemweight] = useState(sessionStorage.getItem('weightn'))
+    const [itemweighttype] = useState(sessionStorage.getItem('weight'))
+    const [delivery] = useState(sessionStorage.getItem('deliverytype'))
+    const [selectedFile] = useState('')
+    
+    
+    const priceForStripe = sessionStorage.getItem('subtotal') * 100;
+    console.log(priceForStripe);
+    const handleSuccess = () => {
+        MySwal.fire({
+          icon: 'success',
+          title: 'Payment was successful',
+          time: 4000,
+        });
+      };
+      const handleFailure = () => {
+        MySwal.fire({
+          icon: 'error',
+          title: 'Payment was not successful',
+          time: 4000,
+        });
+      };
+      const payNow = async token => {
+        try {
+          const response = await axios.post("http://localhost:8000/payment", {
+            amount: sessionStorage.getItem('subtotal') * 100,
+            token,
+      });
+         
+          if (response.status === 200) {
+            axios.post("https://pickedapi.herokuapp.com/order",{
+            email,
+            category,
+            picksearch,
+            pickuptype,
+            pickupunit,
+            pickupbuzzer,
+            pickupadditional,
+            dropsearch,
+            droptype,
+            dropunit,
+            dropbuzzer,
+            dropadditional,
+            itemname,
+            dimensions,
+            dimensionslength,
+            dimensionsheight,
+            dimensionswidth,
+            itemweight,
+            itemweighttype,
+            delivery,
+            selectedFile,
+        })  
+            handleSuccess();
             sessionStorage.clear();
-            window.location.reload();
-        })
-        
-    }
-   render(){
+            setTimeout(function(){
+                window.location.reload();
+             }, 5000);
+          }
+        } catch (error) {
+          handleFailure();
+          console.log(error);
+        }
+      };
+
+    
+    
+   
     
     return(
         <section className="bg-slate-100 h-fit">
@@ -90,17 +146,26 @@ export default class Review extends Component {
                 </div>
             </div>
             <footer className="w-full bg-white fixed left-0 bottom-0 flex flex-col justify-center">
-                <div className="basis-full"> 
+                <div className="basis-full px-3"> 
                     <button onClick={() => sessionStorage.clear()} className="w-1/2 py-2">
                         Cancel Order
                     </button>
-                    <button onClick={this.clicked} className="w-1/2 py-2 bg-blue-500 text-white">
-                        Place Order
-                    </button>
+                    
+                    <StripeCheckout
+                      stripeKey="pk_test_51Ltkf6KCZZ8yHFGVXAQzY8W15M6KNZFDpcHBPwuGSWMu33Cmw3w1sMXcX3JOqPc51lAGJgDWlDhPHHr80ld992CH00dvEYSzNA"
+                      label="Place Order"
+                      billingAddress
+                      shippingAddress
+                      amount={priceForStripe}
+                      description={`total $${sessionStorage.getItem('subtotal')}`}
+                      token={payNow}
+                    className=" w-1/2"
+                    />
+                    
                 </div>
             </footer>
             
         </section>
     )
-    };
+    
 }

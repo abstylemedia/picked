@@ -3,7 +3,7 @@ import Modal from './modal';
 
 export default class additem extends Component {
     componentDidMount(){
-        if (!sessionStorage.getItem('droplocation')){
+        if (!sessionStorage.getItem('Truck')){
             window.location.href = "/category";
         }
     }

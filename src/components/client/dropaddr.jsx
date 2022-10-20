@@ -26,7 +26,7 @@ export default class DropaddResidential extends Component {
             sessionStorage.setItem('dropadd', this.state.additional);
             sessionStorage.setItem('droptype',this.state.type);
 
-            window.location.href = "/additem";
+            window.location.href = "/truck";
         }
         else{
             alert("not add");
