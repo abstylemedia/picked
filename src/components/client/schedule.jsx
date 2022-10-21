@@ -14,7 +14,7 @@ export default function Schedule () {
     const [value, setValue] =useState(dayjs());
     function clicked(e){
         e.preventDefault();
-        sessionStorage.setItem('pickuplocation',value.$d);
+        sessionStorage.setItem('pickuptime',value.$d);
         window.location.href = "/category";
     
     }

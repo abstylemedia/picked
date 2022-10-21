@@ -13,29 +13,38 @@ export default function Review () {
      window.location.href = "/category";
     }
     
-    const [email] = useState(localStorage.getItem('useremail'))
-    const [category] = useState(sessionStorage.getItem('category'))
-    const [picksearch] = useState(sessionStorage.getItem('pickuplocation'))
-    const [pickuptype] = useState(sessionStorage.getItem('picktype'))
-    const [pickupunit] = useState(sessionStorage.getItem('pickunit'))
-    const [pickupbuzzer] = useState(sessionStorage.getItem('pickbuzzer'))
-    const [pickupadditional] = useState(sessionStorage.getItem('pickadd'))
-    const [dropsearch] = useState(sessionStorage.getItem('droplocation'))
-    const [droptype] = useState(sessionStorage.getItem('droptype'))
-    const [dropunit] = useState(sessionStorage.getItem('dropunit'))
-    const [dropbuzzer] = useState(sessionStorage.getItem('dropbuzzer'))
-    const [dropadditional] = useState(sessionStorage.getItem('dropadd'))
-    const [itemname] = useState(sessionStorage.getItem('itemname'))
-    const [dimensions] = useState(sessionStorage.getItem('dimensions'))
-    const [dimensionslength] = useState(sessionStorage.getItem('length'))
-    const [dimensionsheight] = useState(sessionStorage.getItem('height'))
-    const [dimensionswidth] = useState(sessionStorage.getItem('width'))
-    const [itemweight] = useState(sessionStorage.getItem('weightn'))
-    const [itemweighttype] = useState(sessionStorage.getItem('weight'))
-    const [delivery] = useState(sessionStorage.getItem('deliverytype'))
-    const [selectedFile] = useState('')
+    const [email] = useState(localStorage.getItem('useremail'));
+    const [category] = useState(sessionStorage.getItem('category'));
+    const [picksearch] = useState(sessionStorage.getItem('pickuplocation'));
+    const [pickuptype] = useState(sessionStorage.getItem('picktype'));
+    const [pickupunit] = useState(sessionStorage.getItem('pickunit'));
+    const [pickupbuzzer] = useState(sessionStorage.getItem('pickbuzzer'));
+    const [pickupadditional] = useState(sessionStorage.getItem('pickadd'));
+    const [pickupstore] = useState(sessionStorage.getItem('pickstorename'));
+    const [pickupcompany] = useState(sessionStorage.getItem('pickcompanyname'));
+    const [pickuptime] = useState(sessionStorage.getItem('pickuptime'));
+    const [price] = useState(sessionStorage.getItem('subtotal'));
+    const [dropsearch] = useState(sessionStorage.getItem('droplocation'));
+    const [dropcompany] = useState(sessionStorage.getItem('dropcompanyname'));
+    const [droptype] = useState(sessionStorage.getItem('droptype'));
+    const [dropunit] = useState(sessionStorage.getItem('dropunit'));
+    const [dropbuzzer] = useState(sessionStorage.getItem('dropbuzzer'));
+    const [dropadditional] = useState(sessionStorage.getItem('dropadd'));
+    const [itemname] = useState(sessionStorage.getItem('itemname'));
+    const [dimensions] = useState(sessionStorage.getItem('dimensions'));
+    const [dimensionslength] = useState(sessionStorage.getItem('length'));
+    const [dimensionsheight] = useState(sessionStorage.getItem('height'));
+    const [dimensionswidth] = useState(sessionStorage.getItem('width'));
+    const [itemweight] = useState(sessionStorage.getItem('weightn'));
+    const [itemweighttype] = useState(sessionStorage.getItem('weight'));
+    const [delivery] = useState(sessionStorage.getItem('deliverytype'));
+    const [vehicle] = useState(sessionStorage.getItem('Truck'));
+    const [image, setImage] = useState('')
     
-    
+    const handleFileChange = (e) => {
+        
+        setImage(e.target.files[0])
+      }
     const priceForStripe = sessionStorage.getItem('subtotal') * 100;
     console.log(priceForStripe);
     const handleSuccess = () => {
@@ -54,12 +63,14 @@ export default function Review () {
       };
       const payNow = async token => {
         try {
-          const response = await axios.post("http://localhost:8000/payment", {
+          const response = await axios.post("https://pickedapi.herokuapp.com/payment", {
             amount: sessionStorage.getItem('subtotal') * 100,
             token,
       });
          
           if (response.status === 200) {
+            let selectedFile = new FormData()
+                selectedFile.append('file', image)
             axios.post("https://pickedapi.herokuapp.com/order",{
             email,
             category,
@@ -68,7 +79,12 @@ export default function Review () {
             pickupunit,
             pickupbuzzer,
             pickupadditional,
+            pickupstore,
+            pickupcompany,
+            pickuptime,
+            price,
             dropsearch,
+            dropcompany,
             droptype,
             dropunit,
             dropbuzzer,
@@ -81,6 +97,7 @@ export default function Review () {
             itemweight,
             itemweighttype,
             delivery,
+            vehicle,
             selectedFile,
         })  
             handleSuccess();
@@ -129,7 +146,7 @@ export default function Review () {
                             <div className="flex flex-col justify-center items-center ">
                                 <p className="text-gray-500 py-4">Add Receipt & Item Picture</p>
                             </div>
-                            <input id="dropzone-file" type="file" className="hidden" onChange={({ base64 })=>this.setState({selectedFile: base64 })}/>
+                            <input id="dropzone-file" type="file" className="hidden" onChange={handleFileChange}/>
                         </label>
                     </div>
                 </div>

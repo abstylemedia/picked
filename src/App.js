@@ -23,7 +23,6 @@ import Dashboardp from './components/client/Dashbaordp';
 import DropaddResidential from './components/client/dropaddr';
 import DropaddCommerical from './components/client/dropaddc';
 import Schedule from './components/client/schedule';
-import Test from './components/testcode';
 import Truck from './components/client/truck';
 function App() {
   return (
@@ -83,9 +82,7 @@ function App() {
         <Route path="/truck">
           <Truck/>
         </Route>
-        <Route path="/test">
-          <Test/>
-        </Route>
+        
         <Route path="/">
           <Home/>
         </Route>

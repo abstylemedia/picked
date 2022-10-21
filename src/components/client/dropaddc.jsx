@@ -21,7 +21,7 @@ export default class DropaddCommerical extends Component {
     clicked(e){
         e.preventDefault(); 
         if(this.state !==""){
-            
+            sessionStorage.setItem('dropcompanyname',this.state.companyname)
             sessionStorage.setItem('dropunit', this.state.unit);
             sessionStorage.setItem('dropbuzzer', this.state.buzzer);
             sessionStorage.setItem('dropadd', this.state.additional);
