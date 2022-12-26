@@ -10,7 +10,7 @@ const myStyle={
 const Apps = () =>{
     return(
         <div>
-            <div className="h-auto" style={myStyle}>
+            <div className="h-auto" >
                 <div className="basis-full pt-14">
                     <h1 className=" text-center font-semibold text-white text-5xl ">How Does Pickups Work?</h1>
                 </div>

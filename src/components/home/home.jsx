@@ -2,9 +2,9 @@
 import React  from 'react';
 import Navbar from './navbar';
 import Main from './main';
-import Google from './google';
-import Apps from './apps';
-import Footer from './footer';
+// import Google from './google';
+// import Apps from './apps';
+ import Footer from './footer';
 
     
 
@@ -13,8 +13,8 @@ const Home = () =>{
       <div>
       <Navbar/>
       <Main/>
-      <Google/>
-      <Apps/>
+      {/* <Google/>
+      <Apps/> */}
       <Footer/>
      </div>
 

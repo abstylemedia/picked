@@ -9,7 +9,7 @@ const myStyle={
 const Google = () =>{
     return(
     <div>   
-                <div className="flex lg:h-[70vh] md:h-auto sm:auto p-2  justify-center flex-wrap "  style={myStyle}>
+                {/* <div className="flex lg:h-[70vh] md:h-auto sm:auto p-2  justify-center flex-wrap "  style={myStyle}>
                   <div className="basis-full md:basis-1/2
                    sm:basis-1/2 grid place-items-center ">
                     <img src="layer2.jpg" className=" border -rotate-45 scale-[0.4] lg:scale-[0.6] md:scale-[0.5] skew-x-12 skew-y-12 h-full -translate-y-2  md:max-h-96 sm:max-h-96 sm:ml-12 sm:justify-center  " alt="layer" />
@@ -23,7 +23,7 @@ const Google = () =>{
                             <img src="/app-store.png" alt="store" />
                         </div>
                     </div>
-                </div>
+                </div> */}
             
             
     </div>
